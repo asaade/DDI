@@ -1,0 +1,24 @@
+curl -X POST http://localhost:8000/api/v1/items/generate \
+-H "Content-Type: application/json" \
+-d '{
+  "n_items": 2,
+  "dominio": {
+    "area": "Ciencias Sociales",
+    "asignatura": "Historia de México",
+    "tema": "Revolución Mexicana"
+  },
+  "objetivo_original": "El estudiante comprende las causas y consecuencias de la Revolución Mexicana.",
+  "objetivo_aprendizaje": "Analizar un escenario para diferenciar las motivaciones del movimiento zapatista de las del movimiento maderista.",
+  "audiencia": {
+    "nivel_educativo": "Bachillerato",
+    "dificultad_esperada": "Media"
+  },
+  "nivel_cognitivo": "Analizar",
+  "formato": {
+    "tipo_reactivo": "caso_aplicado",
+    "numero_opciones": 4
+  },
+  "contexto": {
+    "contexto_regional": "México"
+  }
+}'

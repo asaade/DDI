@@ -1,0 +1,43 @@
+# config/pipeline.yml
+# Define el flujo completo para el pipeline de Diseño Diagnóstico Iterativo (DDI).
+
+stages:
+
+  # --- FASE 1 & 2: DISEÑO Y CONSTRUCCIÓN ---
+  - name: "analize_construct"
+    params:
+      prompt: "analista_diagnostico.md"
+
+  - name: "architect_item"
+    params:
+      prompt: "arquitecto_psicometrico.md"
+    listen_to_status_pattern: "ANALYSIS_SUCCESS"
+
+  # --- FASE 3: CICLO DE CALIDAD ITERATIVO (QA) ---
+  - qa_cycle:
+      max_retries: 3
+      # Validadores que se ejecutan en paralelo para auditar el borrador.
+      validators:
+        - name: "validate_factual"
+          params: { prompt: "auditor_factual.md" }
+        - name: "validate_psychometric"
+          params: { prompt: "validador_psicometrico.md" }
+        - name: "correct_style"
+          params: { prompt: "corrector_de_estilo.md" }
+
+      # Refinadores invocados si los validadores encuentran problemas.
+      refiners:
+        - name: "refine_item"
+          params: { prompt: "refinador_psicometrico.md" }
+
+  # --- FASE 4: EVALUACIÓN FINAL ---
+  - name: "finalize_item"
+    params:
+      prompt: "evaluador_final.md"
+    # Esta etapa solo se ejecuta si el ciclo de QA fue exitoso.
+    listen_to_status_pattern: "VALIDATION_COMPLETE"
+
+  # --- FASE 5: PERSISTENCIA ---
+  - name: "persist"
+    # La etapa final que guarda los ítems aprobados y evaluados.
+    listen_to_status_pattern: "EVALUATION_COMPLETE"

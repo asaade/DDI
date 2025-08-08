@@ -1,0 +1,42 @@
+# --- Framework de la Aplicación Web ---
+fastapi==0.115.13
+uvicorn==0.34.3
+
+# --- Base de Datos (PostgreSQL) ---
+sqlalchemy==2.0.41
+psycopg[binary]==3.2.9  # Se usa la versión binaria para facilitar la instalación
+
+# --- Validación de Datos y Configuración ---
+pydantic==2.11.7
+pydantic-settings==2.10.0
+python-dotenv==1.1.0
+
+# --- Comunicación con el LLM (Google Gemini) ---
+google-api-core==2.25.1
+google-auth==2.40.3
+google-genai==1.28.0
+googleapis-common-protos==1.70.0
+
+# --- Comunicación con el LLM (OpenAI) ---
+openai==1.90.0
+
+# --- Comunicación con el LLM (Ollama) ---
+ollama==0.5.1
+
+# --- Utilidades Clave ---
+aiohttp==3.12.15
+dpath==2.2.0          # Para navegar y modificar diccionarios anidados (payloads)
+pyyaml==6.0.2         # Para cargar la configuración del pipeline (pipeline.yml)
+tenacity==8.5.0       # Para reintentos robustos en llamadas a la API
+pytz==2025.2
+
+# # --- Dependencias Adicionales (Requeridas por las anteriores) ---
+# anyio==4.9.0
+# click==8.2.1
+# h11==0.16.0
+# httpcore==1.0.9
+# httpx==0.28.1
+# idna==3.10
+# sniffio==1.3.1
+# starlette==0.46.2
+# typing_extensions==4.14.0
